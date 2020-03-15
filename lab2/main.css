@@ -1,0 +1,90 @@
+body {
+    color: black;
+    text-align: center;
+}
+
+footer {
+    background-color: aliceblue;
+    color: rgb(33, 12, 82);
+    font-family: sans-serif;
+    font-size: 30px;
+    width: 50%;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+header {
+    font-weight: 3
+}
+
+table {
+    border-collapse: collapse;
+    border: 3px solid rgb(19, 0, 128);
+    padding: 100px;
+}
+
+td {
+    border-collapse: collapse;
+    border: 3px solid rgb(19, 0, 128);
+}
+
+th {
+    table-layout: fixed;
+    width: 100%;
+    border-collapse: collapse;
+    border: 3px solid rgb(19, 0, 128);
+    font-weight: 100;
+}
+
+th, td {
+    padding: 15px;
+}
+
+body {
+    text-align: center
+}
+
+#pierwszy {
+    background-color: rgb(45, 199, 219);
+    width: 75%;
+    margin-left: 12.5%;
+    margin-right: 12.5%;
+}
+
+#drugi {
+    background-color: rgb(10, 105, 189);
+    width: 75%;
+    margin-left: 12.5%;
+    margin-right: 12.5%;
+}
+
+#super_lot {
+    background-color: rgb(190, 128, 177);
+    width: 200px;
+    /* width: 75%; */
+    /* width: 200 px */
+    /* margin-left: 12.5%;
+    margin-right: 12.5%; */
+    z-index: 1;
+    position: absolute;
+    top: 110px;
+    left: 100px;
+}
+
+#table_box {
+    position: relative;
+} 
+
+#logo {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    height: 100px;
+    width: 100px;
+}
+
+#pic {
+    margin-right: auto;
+    margin-right: auto;
+    height: 300px;
+}
