@@ -75,6 +75,11 @@ body {
     position: relative;
 } 
 
+#table_list {
+    margin-right: auto;
+    margin-left: auto;
+}
+
 #logo {
     display: block;
     margin-left: auto;
