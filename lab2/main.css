@@ -75,6 +75,11 @@ body {
     position: relative;
 } 
 
+#table_list {
+    margin-right: auto;
+    margin-left: auto;
+}
+
 #logo {
     display: block;
     margin-left: auto;
@@ -87,4 +92,41 @@ body {
     margin-right: auto;
     margin-right: auto;
     height: 300px;
+}
+
+/* flight_details */
+
+#name_in_row { 
+    /* width: 300px;
+    height: 200px; */
+    text-align: center;
+    font-size: 20px;
+    margin: 0 auto;
+    padding-top: 30px;
+}
+
+#pic_in_row { 
+    /* width: 300px;
+    height: 200px; */
+    text-align: center;
+    font-size: 20px;
+    margin: 0 auto;
+    padding-top: 30px;
+}
+
+#info {
+    text-align: center;
+    padding-top: 40px;
+    padding-bottom: 40px;
+    font-size: 20px;
+}
+
+#back_button {
+    text-align: center;
+    font-size: 30px;
+}
+    
+.wrap { 
+    display:flex;
+    align-items:center
 }
