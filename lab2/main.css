@@ -1,6 +1,6 @@
 body {
     color: black;
-    text-align: center;
+    /* text-align: center; */
 }
 
 footer {
@@ -89,9 +89,10 @@ body {
 }
 
 #pic {
-    margin-right: auto;
-    margin-right: auto;
+    text-align: center;
     height: 300px;
+    margin: auto;
+    padding-top: 30px;
 }
 
 /* flight_details */
@@ -119,6 +120,7 @@ body {
     padding-top: 40px;
     padding-bottom: 40px;
     font-size: 20px;
+    line-height: 40px;
 }
 
 #back_button {
@@ -129,4 +131,12 @@ body {
 .wrap { 
     display:flex;
     align-items:center
+}
+
+.list_menu {
+    text-align: left;
+    /* margin-left: 40%; */
+    /* margin-right: auto; */
+    list-style: none;
+    font-family: "Arial"
 }
