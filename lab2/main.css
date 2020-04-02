@@ -14,13 +14,15 @@ footer {
   }
 
 header {
-    font-weight: 3
+    font-weight: 3;
+    text-align: center;
 }
 
 table {
     border-collapse: collapse;
     border: 3px solid rgb(19, 0, 128);
     padding: 100px;
+    padding-top: 100px;
 }
 
 td {
@@ -29,8 +31,8 @@ td {
 }
 
 th {
-    table-layout: fixed;
-    width: 100%;
+    /* table-layout: fixed;
+    width: 100%; */
     border-collapse: collapse;
     border: 3px solid rgb(19, 0, 128);
     font-weight: 100;
@@ -44,46 +46,20 @@ body {
     text-align: center
 }
 
-#pierwszy {
-    background-color: rgb(45, 199, 219);
-    width: 75%;
-    margin-left: 12.5%;
-    margin-right: 12.5%;
-}
-
-#drugi {
-    background-color: rgb(10, 105, 189);
-    width: 75%;
-    margin-left: 12.5%;
-    margin-right: 12.5%;
-}
-
-#super_lot {
-    background-color: rgb(190, 128, 177);
-    width: 200px;
-    /* width: 75%; */
-    /* width: 200 px */
-    /* margin-left: 12.5%;
-    margin-right: 12.5%; */
-    z-index: 1;
-    position: absolute;
-    top: 110px;
-    left: 100px;
-}
-
 #table_box {
     position: relative;
 } 
 
-#table_list {
+/* #table_list {
     margin-right: auto;
     margin-left: auto;
-}
+} */
 
 #logo {
     display: block;
     margin-left: auto;
     margin-right: auto;
+    margin-bottom: 100px;
     height: 100px;
     width: 100px;
 }
@@ -91,11 +67,8 @@ body {
 #pic {
     text-align: center;
     height: 300px;
-    margin: auto;
-    padding-top: 30px;
+    padding-bottom: 100px;
 }
-
-/* flight_details */
 
 #name_in_row { 
     /* width: 300px;
@@ -127,16 +100,11 @@ body {
     text-align: center;
     font-size: 30px;
 }
-    
-.wrap { 
-    display:flex;
-    align-items:center
-}
 
-.list_menu {
+.list_menu ul {
     /* text-align: left; */
     /* margin-left: 40%; */
-    margin-right: auto;
+    /* margin-right: auto; */
     list-style: none;
     font-family: "Arial"
 }
@@ -161,4 +129,21 @@ a:visited, a:link {
 
 #canceled {
     background-color: rgb(236, 113, 113);
+}
+
+#to_flex {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
+}
+
+#flex_flights_and_form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#flight_form {
+    text-align: left;
 }
