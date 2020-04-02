@@ -148,4 +148,17 @@ ul {
 a:visited, a:link {
     color: black;
     text-decoration: none;
+    text-transform: uppercase;
+}
+
+#delayed_lvl_1 {
+    background-color: blanchedalmond;
+}
+
+#delayed_lvl_2 {
+    background-color: rgba(245, 177, 100, 0.678);
+}
+
+#canceled {
+    background-color: rgb(236, 113, 113);
 }
