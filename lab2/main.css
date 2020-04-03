@@ -1,3 +1,10 @@
+@media screen and (min-width: 900px) {
+    article {
+      padding: 1rem 3rem;
+    }
+  }
+
+
 body {
     color: black;
     /* text-align: center; */
@@ -146,4 +153,19 @@ a:visited, a:link {
 
 #flight_form {
     text-align: left;
+}
+
+/* hover */
+
+.hover_target {position: relative}
+.hover_target .hover_string {display: none}
+.hover_target:hover .hover_string {
+    display: block;
+    position: absolute;
+    top: 0px;
+    left: 1000px;
+}
+
+#passenger_list li:nth-child(2n+1) {
+    color: blue;
 }
