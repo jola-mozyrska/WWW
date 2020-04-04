@@ -7,42 +7,39 @@
   <title>Page Title</title>
   <meta name='viewport' content='width=device-width, initial-scale=1'>
   <link rel='stylesheet' type='text/css' media='screen' href='main.css'>
+  <link rel='stylesheet' type='text/css' media='screen' href='grid_settings.css'>
   <script src='main.js'></script>
 </head>
 
 <body>
-  <section id="to_flex">
-    <section>
+  <div class="container">
       <nav class="list_menu">
         <ul>Menu
 
-          <li><a href="flight_details.html">Bilety</a>
+          <li><a href="/bilety.html">Bilety</a>
             <ul>
-              <li><a href="flight_details.html">Promocje</a></li>
-              <li><a href="flight_details.html">Premium</a></li>
+              <li><a href="/promocje.html">Promocje</a></li>
+              <li><a href="/premium.html">Premium</a></li>
             </ul>
           </li>
 
-          <li><a href="flight_details.html">Lista miast</a></li>
-          <li>Lista lotnisk</li>
-          <li>Historia linii</li>
-          <li>Oferty wakacyjne</li>
-          <li>Typy samolotów</li>
-          <li>Oferta dla stałych klientów</li>
-          <li>Ucieczki od epidemii</li>
+          <li><a href="/miasta.html">Lista miast</a></li>
+          <li><a href="/lotniska.html">Lista lotnisk</a></li>
+          <li><a href="/historia.html">Historia linii</a></li>
+          <li><a href="/wakacje.html">Oferty wakacyjne</a></li>
+          <li><a href="/samoloty.html">Typy samolotów</a></li>
+          <li><a href="/stali_klienci.html">Oferta dla stałych klientów</a></li>
+          <li><a href="/epidemia.html">Ucieczki od epidemii</a></li>
 
           <ul>
       </nav>
-    </section>
 
-    <section id="main_content">
-      <header class="page-header">
+      <header class="grid_header">
         <h1>Rozkład lotów</h1>
+        <img id=logo src="logo.jpg" alt="logo firmy">
       </header>
 
-      <img id=logo src="logo.jpg" alt="logo firmy">
-
-      <div id=table_box>
+      <div id=table_box class="grid_middle_column">
         <table>
           <tr>
             <th>nr lotu</th>
@@ -69,125 +66,123 @@
           </tr>
         </table>
       </div>
-    </section>
 
-    <section id="flex_flights_and_form">
-      <table id="table_delayed_flights">
-        <tr>
-          <th>skad</th>
-          <th>dokad</th>
-          <th>kiedy</th>
-          <th>stopien<br>opoznienia</th>
-        </tr>
+      <div class="grid_right_column">
+        <table id="table_delayed_flights">
+          <tr>
+            <th>skad</th>
+            <th>dokad</th>
+            <th>kiedy</th>
+            <th>stopien<br>opoznienia</th>
+          </tr>
 
-        <tr id="canceled">
-          <td>Ww</td>
-          <td>Wellington</td>
-          <td>31.04.20</td>
-          <td>odwolany</td>
-        </tr>
+          <tr id="canceled">
+            <td>Ww</td>
+            <td>Wellington</td>
+            <td>31.04.20</td>
+            <td>odwolany</td>
+          </tr>
 
-        <tr id="canceled">
-          <td>Ww</td>
-          <td>Londyn</td>
-          <td>31.04.20</td>
-          <td>odwolany</td>
-        </tr>
+          <tr id="canceled">
+            <td>Ww</td>
+            <td>Londyn</td>
+            <td>31.04.20</td>
+            <td>odwolany</td>
+          </tr>
 
-        <tr id="delayed_lvl_1">
-          <td>Londyn</td>
-          <td>Wellington</td>
-          <td>31.04.20</td>
-          <td>32 minuty</td>
-        </tr>
+          <tr id="delayed_lvl_1">
+            <td>Londyn</td>
+            <td>Wellington</td>
+            <td>31.04.20</td>
+            <td>32 minuty</td>
+          </tr>
 
-        <tr id="delayed_lvl_1">
-          <td>Londyn</td>
-          <td>Waszyngton</td>
-          <td>31.04.20</td>
-          <td>32 minuty</td>
-        </tr>
+          <tr id="delayed_lvl_1">
+            <td>Londyn</td>
+            <td>Waszyngton</td>
+            <td>31.04.20</td>
+            <td>32 minuty</td>
+          </tr>
 
-        <tr id="delayed_lvl_2">
-          <td>Cambridge</td>
-          <td>Wellington</td>
-          <td>31.04.20</td>
-          <td>53 minuty</td>
-        </tr>
+          <tr id="delayed_lvl_2">
+            <td>Cambridge</td>
+            <td>Wellington</td>
+            <td>31.04.20</td>
+            <td>53 minuty</td>
+          </tr>
 
-        <tr id="delayed_lvl_1">
-          <td>Bangkok</td>
-          <td>Wellington</td>
-          <td>31.04.20</td>
-          <td>32 minuty</td>
-        </tr>
+          <tr id="delayed_lvl_1">
+            <td>Bangkok</td>
+            <td>Wellington</td>
+            <td>31.04.20</td>
+            <td>32 minuty</td>
+          </tr>
 
-        <tr id="delayed_lvl_1">
-          <td>Londyn</td>
-          <td>Wellington</td>
-          <td>06.04.20</td>
-          <td>32 minuty</td>
-        </tr>
+          <tr id="delayed_lvl_1">
+            <td>Londyn</td>
+            <td>Wellington</td>
+            <td>06.04.20</td>
+            <td>32 minuty</td>
+          </tr>
 
-        <tr id="delayed_lvl_1">
-          <td>Londyn</td>
-          <td>Wellington</td>
-          <td>04.04.20</td>
-          <td>32 minuty</td>
-        </tr>
+          <tr id="delayed_lvl_1">
+            <td>Londyn</td>
+            <td>Wellington</td>
+            <td>04.04.20</td>
+            <td>32 minuty</td>
+          </tr>
 
-        <tr id="delayed_lvl_1">
-          <td>Londyn</td>
-          <td>Wellington</td>
-          <td>02.04.20</td>
-          <td>32 minuty</td>
-        </tr>
-      </table>
+          <tr id="delayed_lvl_1">
+            <td>Londyn</td>
+            <td>Wellington</td>
+            <td>02.04.20</td>
+            <td>32 minuty</td>
+          </tr>
+        </table>
 
-      <form action="/my-handling-form-page" method="post" id="flight_form">
-        <ul>
-          <li>
-            <label for="name">Skąd</label>
-            <select id="departures" name="departureslist" form="departuresform">
-              <option value="Ww">Warszawa</option>
-              <option value="Wellington">Wellington</option>
-              <option value="Krakow">Krakow</option>
-            </select>
-          </li>
-          <li>
-            <label for="name">Dokad</label>
-            <select id="arrivals" name="arrivalslist" form="arrivalsform">
-              <option value="Ww">London</option>
-              <option value="Wellington">Wellington</option>
-              <option value="Krakow">Krakow</option>
-            </select>
-          </li>
-          <li>
-            <label for="fname">Imię</label>
-            <input type="text" id="fname" name="fname">
-          </li>
-          <li>
-            <label for="surname">Nazwisko</label>
-            <input type="text" id="surname" name="surname">
-          </li>
-          <li>
-            <label for="flight_date">Data lotu</label>
-            <select id="flight_date" name="flight_date_list" form="flight_date_form">
-              <option value="1">20.03.20</option>
-              <option value="2">13.04.20</option>
-              <option value="3">27.05.20</option>
-            </select>
-          </li>
-        </ul>
-        <input type="button" onclick="clear_form()" value="Reset form">
-        <input type="submit">
-      </form>
-    </section>
-  </section>
-
-  <footer>
-    Jola Mozyrska
-  </footer>
+        <form action="/my-handling-form-page" method="post" id="flight_form">
+          <ul>
+            <li>
+              <label for="name">Skąd</label>
+              <select id="departures" name="departureslist" form="departuresform">
+                <option value="Ww">Warszawa</option>
+                <option value="Wellington">Wellington</option>
+                <option value="Krakow">Krakow</option>
+              </select>
+            </li>
+            <li>
+              <label for="name">Dokad</label>
+              <select id="arrivals" name="arrivalslist" form="arrivalsform">
+                <option value="Ww">London</option>
+                <option value="Wellington">Wellington</option>
+                <option value="Krakow">Krakow</option>
+              </select>
+            </li>
+            <li>
+              <label for="fname">Imię</label>
+              <input type="text" id="fname" name="fname">
+            </li>
+            <li>
+              <label for="surname">Nazwisko</label>
+              <input type="text" id="surname" name="surname">
+            </li>
+            <li>
+              <label for="flight_date">Data lotu</label>
+              <select id="flight_date" name="flight_date_list" form="flight_date_form">
+                <option value="1">20.03.20</option>
+                <option value="2">13.04.20</option>
+                <option value="3">27.05.20</option>
+              </select>
+            </li>
+          </ul>
+          <input type="button" onclick="clear_form()" value="Reset form">
+          <input type="submit">
+        </form>
+      </div>
+    <footer class="footer">
+      Jola Mozyrska
+    </footer>
+  </div>
 
 </body>
 

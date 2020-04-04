@@ -66,7 +66,7 @@ body {
     display: block;
     margin-left: auto;
     margin-right: auto;
-    margin-bottom: 100px;
+    /* margin-bottom: 100px; */
     height: 100px;
     width: 100px;
 }
@@ -108,10 +108,8 @@ body {
     font-size: 30px;
 }
 
-.list_menu ul {
-    /* text-align: left; */
-    /* margin-left: 40%; */
-    /* margin-right: auto; */
+.list_menu > ul, .list_menu li {
+    text-align: left;
     list-style: none;
     font-family: "Arial"
 }
@@ -120,7 +118,7 @@ ul {
     padding-left: 5%;
 }
 
-a:visited, a:link {
+.list_menu a:visited, .list_menu a:link {
     color: black;
     text-decoration: none;
     text-transform: uppercase;
@@ -145,14 +143,8 @@ a:visited, a:link {
     justify-content: space-around;
 }
 
-#flex_flights_and_form {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-
 #flight_form {
-    text-align: left;
+    text-align: center;
 }
 
 /* hover */
@@ -166,6 +158,16 @@ a:visited, a:link {
     left: 1000px;
 }
 
-#passenger_list li:nth-child(2n+1) {
+#passenger_list li:nth-child(odd) {
     color: blue;
+}
+
+@media screen and (max-width: 1000px) {
+    #weather {
+      display: none;
+    }
+  
+    #city_images {
+      display: none;
+    }
 }
