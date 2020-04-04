@@ -1,13 +1,5 @@
-@media screen and (min-width: 900px) {
-    article {
-      padding: 1rem 3rem;
-    }
-  }
-
-
 body {
     color: black;
-    /* text-align: center; */
 }
 
 footer {
@@ -15,10 +7,11 @@ footer {
     color: rgb(33, 12, 82);
     font-family: sans-serif;
     font-size: 30px;
-    width: 50%;
-    margin-left: auto;
-    margin-right: auto;
-  }
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 2.5rem; 
+}
 
 header {
     font-weight: 3;
@@ -38,8 +31,6 @@ td {
 }
 
 th {
-    /* table-layout: fixed;
-    width: 100%; */
     border-collapse: collapse;
     border: 3px solid rgb(19, 0, 128);
     font-weight: 100;
@@ -56,11 +47,6 @@ body {
 #table_box {
     position: relative;
 } 
-
-/* #table_list {
-    margin-right: auto;
-    margin-left: auto;
-} */
 
 #logo {
     display: block;
@@ -97,8 +83,8 @@ body {
 
 #info {
     text-align: center;
-    padding-top: 40px;
-    padding-bottom: 40px;
+    padding-top: 20px;
+    padding-bottom: 20px;
     font-size: 20px;
     line-height: 40px;
 }
@@ -108,10 +94,19 @@ body {
     font-size: 30px;
 }
 
+.list_menu {
+    /* display: block; */
+    background-color: rgba(159, 240, 236, 0.966);
+}
+
+.list_menu li {
+    padding: 10px;
+}
+
 .list_menu > ul, .list_menu li {
     text-align: left;
     list-style: none;
-    font-family: "Arial"
+    font-family: "Arial";
 }
 
 ul {
@@ -147,7 +142,6 @@ ul {
     text-align: center;
 }
 
-/* hover */
 .hover_target {position: relative}
 .hover_target .hover_string {display: none}
 .hover_target:hover .hover_string {
