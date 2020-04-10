@@ -138,7 +138,11 @@ ul {
 }
 
 #flight_form {
-    text-align: center;
+    text-align: left;
+}
+
+#flight_form > * {
+    line-height: 3;
 }
 
 .hover_target {position: relative}
@@ -176,4 +180,8 @@ ul {
     width: 100%;
     height: 100%;
     background-color: rgba(25, 202, 119, 0.5);
+}
+
+.reserved_flight p {
+    background-color: white;
 }
