@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="pl-PL">
 
 <head>
   <meta charset="utf-8">
@@ -31,7 +31,7 @@
           <li><a href="/stali_klienci.html">Oferta dla stałych klientów</a></li>
           <li><a href="/epidemia.html">Ucieczki od epidemii</a></li>
 
-          <ul>
+        </ul>
       </nav>
 
       <header class="grid_header">
@@ -40,7 +40,7 @@
       </header>
 
       <div id=table_box class="grid_middle_column">
-        <table>
+        <table class="table_adjust">
           <tr>
             <th>nr lotu</th>
             <th>skad</th>
@@ -63,12 +63,13 @@
             <td>Hogwart</td>
             <td>20.02.21</td>
             <td>20:20</td>
+            <td>brak szczegółów</td>
           </tr>
         </table>
       </div>
 
       <div class="grid_right_column">
-        <table id="table_delayed_flights">
+        <table id="table_delayed_flights" class="table_adjust">
           <tr>
             <th>skad</th>
             <th>dokad</th>
@@ -76,83 +77,85 @@
             <th>stopien<br>opoznienia</th>
           </tr>
 
-          <tr id="canceled">
+          <tr class="canceled">
             <td>Ww</td>
             <td>Wellington</td>
             <td>31.04.20</td>
             <td>odwolany</td>
           </tr>
 
-          <tr id="canceled">
+          <tr class="canceled">
             <td>Ww</td>
             <td>Londyn</td>
             <td>31.04.20</td>
             <td>odwolany</td>
           </tr>
 
-          <tr id="delayed_lvl_1">
+          <tr class="delayed_lvl_1">
             <td>Londyn</td>
             <td>Wellington</td>
             <td>31.04.20</td>
             <td>32 minuty</td>
           </tr>
 
-          <tr id="delayed_lvl_1">
+          <tr class="delayed_lvl_1">
             <td>Londyn</td>
             <td>Waszyngton</td>
             <td>31.04.20</td>
             <td>32 minuty</td>
           </tr>
 
-          <tr id="delayed_lvl_2">
+          <tr class="delayed_lvl_2">
             <td>Cambridge</td>
             <td>Wellington</td>
             <td>31.04.20</td>
             <td>53 minuty</td>
           </tr>
 
-          <tr id="delayed_lvl_1">
+          <tr class="delayed_lvl_1">
             <td>Bangkok</td>
             <td>Wellington</td>
             <td>31.04.20</td>
             <td>32 minuty</td>
           </tr>
 
-          <tr id="delayed_lvl_1">
+          <tr class="delayed_lvl_1">
             <td>Londyn</td>
             <td>Wellington</td>
             <td>06.04.20</td>
             <td>32 minuty</td>
           </tr>
 
-          <tr id="delayed_lvl_1">
+          <tr class="delayed_lvl_1">
             <td>Londyn</td>
             <td>Wellington</td>
             <td>04.04.20</td>
             <td>32 minuty</td>
           </tr>
 
-          <tr id="delayed_lvl_1">
+          <tr class="delayed_lvl_1">
             <td>Londyn</td>
             <td>Wellington</td>
             <td>02.04.20</td>
             <td>32 minuty</td>
           </tr>
         </table>
+      </div>
 
+      <div class="grid_form">
         <form action="/my-handling-form-page" method="post" id="flight_form">
           <ul>
             <li>
-              <label for="name">Skąd</label>
-              <select id="departures" name="departureslist" form="departuresform">
+              <label for="departureslist">Skąd</label>
+              <select id="departureslist" name="departureslist">
                 <option value="Ww">Warszawa</option>
                 <option value="Wellington">Wellington</option>
                 <option value="Krakow">Krakow</option>
               </select>
             </li>
             <li>
-              <label for="name">Dokad</label>
-              <select id="arrivals" name="arrivalslist" form="arrivalsform">
+              <label for="arrivals">Dokad</label>
+              <select id="arrivals" name="arrivals">
                 <option value="Ww">London</option>
                 <option value="Wellington">Wellington</option>
                 <option value="Krakow">Krakow</option>
@@ -168,7 +171,7 @@
             </li>
             <li>
               <label for="flight_date">Data lotu</label>
-              <select id="flight_date" name="flight_date_list" form="flight_date_form">
+              <select id="flight_date" name="flight_date">
                 <option value="1">20.03.20</option>
                 <option value="2">13.04.20</option>
                 <option value="3">27.05.20</option>
