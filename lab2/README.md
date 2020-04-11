@@ -1,1 +1,1 @@
-1. Zadanie laborytoryjne ze scenariusza 2 znajduje się w pliku flight_details.html
+Strona z kroku 11 znajduje się w pliku main_reserved_flight.html
