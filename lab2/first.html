@@ -8,7 +8,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" type="text/css" media="screen" href="main.css">
   <link rel="stylesheet" type="text/css" media="screen" href="grid_settings.css">
-  <script src="main.js"></script>
+  <link rel="stylesheet" type="text/ts" media="screen" href="main.ts">
 </head>
 
 <body>
@@ -49,7 +49,7 @@
             <th>godzina</th>
             <th>szczegóły lotu</th>
           </tr>
-          <tr>
+          <tr data-id-lotu="42">
             <td>42</td>
             <td>Ww</td>
             <td>Wellington</td>
@@ -57,7 +57,7 @@
             <td>13:13</td>
             <td><a href="flight_details.html">link</a></td>
           </tr>
-          <tr>
+          <tr data-id-lotu="11">
             <td>11</td>
             <td>Londyn</td>
             <td>Hogwart</td>
@@ -68,7 +68,7 @@
         </table>
       </div>
 
-      <div class="grid_right_column">
+      <div class="grid_right_column" id="grid_right_column">
         <table id="table_delayed_flights" class="table_adjust">
           <tr>
             <th>skad</th>
@@ -142,12 +142,13 @@
         </table>
       </div>
 
-      <div class="grid_form">
+      <div class="grid_form" id="grid_form">
         <form action="/my-handling-form-page" method="post" id="flight_form">
           <ul>
             <li>
               <label for="departureslist">Skąd</label>
               <select id="departureslist" name="departureslist">
+                <option value="none">-</option>
                 <option value="Ww">Warszawa</option>
                 <option value="Wellington">Wellington</option>
                 <option value="Krakow">Krakow</option>
@@ -156,6 +157,7 @@
             <li>
               <label for="arrivals">Dokad</label>
               <select id="arrivals" name="arrivals">
+                <option value="none">-</option>
                 <option value="Ww">London</option>
                 <option value="Wellington">Wellington</option>
                 <option value="Krakow">Krakow</option>
@@ -172,14 +174,14 @@
             <li>
               <label for="flight_date">Data lotu</label>
               <select id="flight_date" name="flight_date">
-                <option value="1">20.03.20</option>
-                <option value="2">13.04.20</option>
-                <option value="3">27.05.20</option>
+                <option value='1998-12-17'>1998-12-17</option>
+                <option value='2020-12-01'>2020-12-01</option>
+                <option value='2020-09-09'>2020-09-09</option>
               </select>
             </li>
           </ul>
-          <input type="reset" value="Reset form">
-          <input type="submit">
+          <input type="reset" value="Resetuj">
+          <input type="submit" value="Wyslij" disabled>
         </form>
       </div>
     <footer class="footer">
@@ -187,5 +189,7 @@
     </footer>
   </div>
 
+  <script src="main.js"></script>
+  <script src="play_ts_script.js"></script>
 </body>
 </html>
