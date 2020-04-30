@@ -1,65 +1,98 @@
-const listOfFlights = document.querySelectorAll('tr[data-id-lotu]');
-let mxNr = 0;
-for(const elem of listOfFlights) {
-    const str = elem.getAttribute("data-id-lotu");
-    const nr = +str;
-    if(mxNr < nr)
-        mxNr = nr;
+// function paint_elem(ev: MouseEvent) {
+//     let target = ev.target;
+//     let elem = this as HTMLElement;
+
+//     console.log(elem, target);
+
+//     let currentColor = window.getComputedStyle(elem).getPropertyValue('background-color');
+//     let [_,...colorsAsText] = /rgb\((\d+),[^0-9]*(\d+),[^0-9]*(\d+)\)/.exec(currentColor);
+//     let colors: number[] = [];
+//     for(let i = 0; i < 3; i++) colors[i] = (parseInt(colorsAsText[i]) + 0x20) % 256;
+//     elem.style.backgroundColor = `rgb(${colors[0]},${colors[1]},${colors[2]})`;
+// }
+
+// delayed_element.addEventListener('click', paint_elem);
+// reserved_element.addEventListener('click', paint_elem);
+
+//==============================================================================
+let delayed_element = document.getElementById('grid_right_column');
+let reserved_element = document.getElementById('grid_form');
+
+document.getElementsByTagName('div')[0].addEventListener('click', pokoloruj2);
+
+function pokoloruj2(ev : MouseEvent) {
+    const target = ev.target as HTMLElement;
+    if(delayed_element.contains(target) || reserved_element.contains(target))
+        console.log('trafilismy');
+    else
+        console.log('pudlo');
+}
+//===============================================================================
+let counter : number = 0;
+
+document.getElementsByTagName('div')[0].addEventListener('click', print_fib);
+
+function print_fib() {
+    counter += 1;
+    console.log(fib(counter));
 }
 
-// console.log(mxNr);
-
-function wait(ms : number) {
-    return new Promise((resolve, reject) => {
-        window.setTimeout(resolve, ms);
-    });
+function fib(n : number) : number {
+    if(n < 2) return n;
+    return fib(n - 1) + fib(n - 2);
 }
 
-function teczoweKolory(el: HTMLElement) {
-    console.log("here");
+reserved_element.addEventListener('change', checkChoosenData);
 
-    setTimeout(function () {
-        console.log('red');
-        el.style.backgroundColor = 'red';
-        setTimeout(function() {
-            el.style.backgroundColor = 'orange';
-            setTimeout(function() {
-                el.style.backgroundColor = 'yellow';
-                setTimeout(function() {
-                    el.style.backgroundColor = 'green';
-                    setTimeout(function() {
-                        el.style.backgroundColor = 'blue';
-                        setTimeout(function() {
-                            el.style.backgroundColor = 'indigo';
-                            setTimeout(function() {
-                                el.style.backgroundColor = 'purple';
-                            }, 1000);
-                        }, 1000);
-                    }, 1000);
-                }, 1000);
-            }, 1000);
-        }, 1000);
-    }, 1000);
+const popup = document.getElementsByClassName("reserved_flight")[0] as HTMLDivElement;
+popup.addEventListener("click", () => {
+    popup.style.display = "none";
+});
+
+document.querySelector('[type=submit]').addEventListener("click", () => {
+    event.preventDefault();
+    //  get flight info
+    const passegerName = (<HTMLInputElement>document.getElementById('fname')).value;
+    var dateControl = <HTMLInputElement>document.querySelector('input[type="date"]');
+    const date_obj = new Date(dateControl.value);
+    const  month = date_obj.getUTCMonth() + 1;
+    const day = date_obj.getUTCDate();
+    const year = date_obj.getUTCFullYear();
+    const new_date = year + "/" + month + "/" + day;
+
+    const depart_list = <HTMLSelectElement>document.getElementById('departureslist');
+    const depart_city = depart_list.options[depart_list.selectedIndex].text;
+    const arrival_list = <HTMLSelectElement>document.getElementById('arrivals');
+    const arrival_city = arrival_list.options[arrival_list.selectedIndex].text;
+
+    const flight_details = "Wylot: " + depart_city + "\nPrzylot: " + arrival_city + "\nData: " + new_date;
+
+    popup.style.display = "block";  
+    const popup_p = popup.firstElementChild as HTMLParagraphElement;
+    popup_p.innerText = "Zarezerwowano lot\n" + flight_details;
+})
+
+function checkChoosenData(ev : MouseEvent) {
+    if(checkCities() && checkDate() && checkNames()) 
+        document.querySelector('[type=submit]').removeAttribute('disabled');
+    else
+        document.querySelector('[type=submit]').setAttribute('disabled', 'yes');
 }
 
-function teczoweKoloryPromise(el: HTMLElement) {
-    let promise = wait(1000);
-    for(const color of ['red', 'white', 'blue']) {
-        promise = promise.then(function() {
-            el.style.backgroundColor = color; return wait(1000);
-        });
-    }
+function checkCities() : boolean {
+    let wrongDeparture = document.getElementById('departureslist')[0].selected;
+    let wrongArrival = document.getElementById('arrivals')[0].selected;
+    return !(wrongDeparture || wrongArrival);
 }
 
-const colorful_elem : HTMLElement = document.getElementById('table_box');
-// teczoweKoloryPromise(colorful_elem);
+function checkDate() : boolean {
+    var dateControl = <HTMLInputElement>document.querySelector('input[type="date"]');
+    const choosenDate = new Date(dateControl.value);
+    const today = new Date();
+    return choosenDate.getTime() - today.getTime() >= 0;
+}   
 
-//  async, await function
-async function teczoweKolory_async(el : HTMLElement) {
-    const colors = ['pink', 'black'];
-    for(const color of colors) {
-        await wait(1000);
-        console.log(color);
-        el.style.backgroundColor = color;
-    }
+function checkNames() : boolean {
+    const name = (<HTMLInputElement>document.getElementById('fname')).value;
+    return name.trim().indexOf(' ') != -1;
 }

@@ -36,7 +36,7 @@
 
       <header class="grid_header">
         <h1>Rozkład lotów</h1>
-        <img id=logo src="logo.jpg" alt="logo firmy">
+        <img id=logo src="img/logo.jpg" alt="logo firmy">
       </header>
 
       <div id=table_box class="grid_middle_column">
@@ -164,25 +164,24 @@
               </select>
             </li>
             <li>
-              <label for="fname">Imię</label>
+              <label for="fname">Imię i Nazwisko</label>
               <input type="text" id="fname" name="fname">
             </li>
             <li>
-              <label for="surname">Nazwisko</label>
-              <input type="text" id="surname" name="surname">
-            </li>
-            <li>
               <label for="flight_date">Data lotu</label>
-              <select id="flight_date" name="flight_date">
-                <option value='1998-12-17'>1998-12-17</option>
-                <option value='2020-12-01'>2020-12-01</option>
-                <option value='2020-09-09'>2020-09-09</option>
-              </select>
+              <input type="date" id="flight_date" name="flight_date"
+                value="2020-07-22"
+                min="2018-01-01" max="2021-12-31">
             </li>
           </ul>
           <input type="reset" value="Resetuj">
           <input type="submit" value="Wyslij" disabled>
         </form>
+
+        <div class="reserved_flight">
+          <p>Pomyślnie zarezerwowano lot!</p>
+        </div>
+
       </div>
     <footer class="footer">
       Jola Mozyrska
