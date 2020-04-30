@@ -2,12 +2,15 @@ import {Builder, Capabilities, Key} from 'selenium-webdriver';
 import { expect } from 'chai';
 import { driver } from 'mocha-webdriver';
 
+const future_date = "2040-12-01";
+
 describe('test_blocked_links', function () {
 
     it('checks blocked links after submit', async function() {
         this.timeout(20000);
         await driver.get(`file://${process.cwd()}/first.html`);
-        driver.executeScript(`document.querySelector('input[type=date]').value = "2040-12-01";`);
+        const command = `document.querySelector('input[type=date]').value = "` + future_date + `";`;
+        driver.executeScript(command);
 
         await driver.find('input[name=fname]').sendKeys('Albert Einstain');
         await driver.find('select[id=departureslist]').sendKeys('Warszawa', Key.RETURN);
