@@ -16,14 +16,12 @@ describe('test_blocked_links', function () {
         await driver.find('select[id=departureslist]').sendKeys('Warszawa', Key.RETURN);
         await driver.find('select[id=arrivals]').sendKeys('London', Key.RETURN);
 
-        expect(await driver.find('input[type=submit]').then(() => true, () => false)).to.equal(true);
-        expect(await (await driver.find('input[type=submit]')).isEnabled()).to.equal(true);
+        expect(await ( driver.find('input[type=submit]')).isEnabled()).to.equal(true);
         await (await driver.find('input[type=submit]')).click();
-        expect(await driver.find('table_adjust').doClick().then(() => {
-                return true;
-            }, () => {
-                return false;
-            })).to.equal(false);
+        expect(await driver.find('table_adjust').doClick().then(
+            () => true,
+            () => false
+            )).to.equal(false);
     });
 })
 

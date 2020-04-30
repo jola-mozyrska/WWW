@@ -46,6 +46,10 @@ body {
     position: relative;
 } 
 
+.right_table, td, th{
+    overflow: hidden;
+}
+
 #logo {
     display: block;
     margin-left: auto;
