@@ -14,20 +14,20 @@
 // delayed_element.addEventListener('click', paint_elem);
 // reserved_element.addEventListener('click', paint_elem);
 
-//==============================================================================
-let delayed_element = document.getElementById('grid_right_column');
-let reserved_element = document.getElementById('grid_form');
+// ==============================================================================
+let delayedElement = document.getElementById('grid_right_column');
+let reservedElement = document.getElementById('grid_form');
 
 document.getElementsByTagName('div')[0].addEventListener('click', pokoloruj2);
 
 function pokoloruj2(ev : MouseEvent) {
     const target = ev.target as HTMLElement;
-    if(delayed_element.contains(target) || reserved_element.contains(target))
+    if(delayedElement.contains(target) || reservedElement.contains(target))
         console.log('trafilismy');
     else
         console.log('pudlo');
 }
-//===============================================================================
+// ===============================================================================
 let counter : number = 0;
 
 document.getElementsByTagName('div')[0].addEventListener('click', print_fib);
@@ -42,7 +42,7 @@ function fib(n : number) : number {
     return fib(n - 1) + fib(n - 2);
 }
 
-reserved_element.addEventListener('change', checkChoosenData);
+reservedElement.addEventListener('input', checkChoosenData);
 
 const popup = document.getElementsByClassName("reserved_flight")[0] as HTMLDivElement;
 popup.addEventListener("click", () => {
@@ -52,47 +52,49 @@ popup.addEventListener("click", () => {
 document.querySelector('[type=submit]').addEventListener("click", () => {
     event.preventDefault();
     //  get flight info
-    const passegerName = (<HTMLInputElement>document.getElementById('fname')).value;
-    var dateControl = <HTMLInputElement>document.querySelector('input[type="date"]');
-    const date_obj = new Date(dateControl.value);
-    const  month = date_obj.getUTCMonth() + 1;
-    const day = date_obj.getUTCDate();
-    const year = date_obj.getUTCFullYear();
-    const new_date = year + "/" + month + "/" + day;
+    const passegerName = (document.getElementById('fname') as HTMLInputElement).value;
+    const dateControl = document.querySelector('input[type="date"]') as HTMLInputElement;
+    const dateObj = new Date(dateControl.value);
+    const  month = dateObj.getUTCMonth() + 1;
+    const day = dateObj.getUTCDate();
+    const year = dateObj.getUTCFullYear();
+    const newDate = year + "/" + month + "/" + day;
 
-    const depart_list = <HTMLSelectElement>document.getElementById('departureslist');
-    const depart_city = depart_list.options[depart_list.selectedIndex].text;
-    const arrival_list = <HTMLSelectElement>document.getElementById('arrivals');
-    const arrival_city = arrival_list.options[arrival_list.selectedIndex].text;
+    const departList = document.getElementById('departureslist') as HTMLSelectElement;
+    const departCity = departList.options[departList.selectedIndex].text;
+    const arrivalList = document.getElementById('arrivals') as HTMLSelectElement;
+    const arrivalCity = arrivalList.options[arrivalList.selectedIndex].text;
 
-    const flight_details = "Wylot: " + depart_city + "\nPrzylot: " + arrival_city + "\nData: " + new_date;
+    const flightDetails = "Wylot: " + departCity + "\nPrzylot: " + arrivalCity + "\nData: " + newDate;
 
-    popup.style.display = "block";  
-    const popup_p = popup.firstElementChild as HTMLParagraphElement;
-    popup_p.innerText = "Zarezerwowano lot\n" + flight_details;
+    popup.style.display = "block";
+    const popupPar = popup.firstElementChild as HTMLParagraphElement;
+    popupPar.innerText = "Zarezerwowano lot\n" + flightDetails;
 })
 
 function checkChoosenData(ev : MouseEvent) {
-    if(checkCities() && checkDate() && checkNames()) 
+    if(checkCities() && checkDate() && checkNames())
         document.querySelector('[type=submit]').removeAttribute('disabled');
     else
         document.querySelector('[type=submit]').setAttribute('disabled', 'yes');
 }
 
 function checkCities() : boolean {
-    let wrongDeparture = document.getElementById('departureslist')[0].selected;
-    let wrongArrival = document.getElementById('arrivals')[0].selected;
+    const wrongDeparture = document.getElementById('departureslist')[0].selected;
+    const wrongArrival = document.getElementById('arrivals')[0].selected;
     return !(wrongDeparture || wrongArrival);
 }
 
 function checkDate() : boolean {
-    var dateControl = <HTMLInputElement>document.querySelector('input[type="date"]');
+    const dateControl = document.querySelector('input[type="date"]') as HTMLInputElement;
     const choosenDate = new Date(dateControl.value);
     const today = new Date();
-    return choosenDate.getTime() - today.getTime() >= 0;
-}   
+    const choosenDateDay = Date.UTC(choosenDate.getFullYear(), choosenDate.getMonth(), choosenDate.getDate());
+    const todayDay = Date.UTC(today.getFullYear(), today.getMonth(), today.getDate());
+    return choosenDateDay - todayDay >= 0;
+}
 
 function checkNames() : boolean {
-    const name = (<HTMLInputElement>document.getElementById('fname')).value;
-    return name.trim().indexOf(' ') != -1;
+    const name = (document.getElementById('fname') as HTMLInputElement).value;
+    return name.trim().indexOf(' ') !== -1;
 }
