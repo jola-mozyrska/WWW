@@ -1,0 +1,46 @@
+body {
+    background-color: aliceblue;
+}
+
+img {
+    height: 400px;
+    width: auto;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    padding-bottom: 60px;
+}
+
+h1, h2{
+    text-align: center;
+}
+
+table {
+    border-collapse: collapse;
+    border: 3px solid rgb(19, 0, 128);
+    padding: 100px;
+    padding-top: 100px;
+    padding-bottom: 100px;
+    width: 500px;
+    margin: auto;
+}
+
+th {
+    border-collapse: collapse;
+    border: 3px solid rgb(19, 0, 128);
+    font-weight: 100;
+}
+
+th, td {
+    padding: 15px;
+    font-size: 30px;
+}
+
+li{ 
+    list-style-type: none;
+}
+
+form {
+    padding-top: 100px;
+    text-align: center;
+}

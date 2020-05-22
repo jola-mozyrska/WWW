@@ -1,0 +1,24 @@
+html
+
+    head
+
+    style
+
+        include style.css
+
+    body
+
+        table
+        
+            tr
+                th HISTORIA CEN
+
+            each price in meme.getPriceHistory()
+            
+                tr
+
+                    th #{price}
+
+        form(action="/meme/" + String(meme.id), method='POST')
+            input(type='text', name='price', value='')
+            input(type='submit', value='Zmień')

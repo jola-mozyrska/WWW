@@ -1,0 +1,27 @@
+html
+
+    head
+
+        title= title
+
+    style
+
+        include style.css
+
+    body
+
+        h1= message
+
+        img(src="https://onlineacademiccommunity.uvic.ca/callmebog/wp-content/uploads/sites/219/2017/08/techkitty.jpg")
+
+        h1="Lista memów"
+
+        ul
+
+            each meme in memes
+
+                li
+
+                   h2 CENA: #{meme.price}
+                   a(href="meme/" + meme.id) 
+                    img(src=meme.url)
