@@ -5,9 +5,9 @@
   "main": "js/app.js",
   "scripts": {
     "test": "mocha js/testy.js",
-    "build": "tsc --target es2015 server.ts",
+    "build": "tsc",
     "watch": "npm-watch",
-    "lint": "tslint"
+    "lint": "tslint --project ."
   },
   "paths": {
     "*": [

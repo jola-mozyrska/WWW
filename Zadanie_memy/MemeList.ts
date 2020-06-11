@@ -17,10 +17,7 @@ export class MemeList {
     getMostExpensiveMemes(): Array<Meme> {
         this.list.sort((m1, m2) => m2.price - m1.price)
         const newL: Array<Meme> = new Array();
-        for(let i = 0; i < Math.min(3, this.list.length); ++i) {
-            newL.push(this.list[i]);
-        }
-        return newL;
+        return this.list.slice(0, Math.min(3, this.list.length));
     }
 
     getMeme(idStr: string): Meme {
