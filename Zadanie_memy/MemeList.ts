@@ -12,17 +12,24 @@ export class MemeList {
     push(meme: Meme):void {
         this.list.push(meme);
         this.idMap.set(meme.id, this.list.length - 1);
+        console.log(this.list.length - 1, "id: ", meme.id);
+        console.log("lista: ", this.list);
+
     }
 
     getMostExpensiveMemes(): Array<Meme> {
-        this.list.sort((m1, m2) => m2.price - m1.price)
-        const newL: Array<Meme> = new Array();
-        return this.list.slice(0, Math.min(3, this.list.length));
+        const sorted : Array<Meme> = Object.assign([], this.list);
+        sorted.sort((m1, m2) => m2.price - m1.price);
+        return sorted.slice(0, Math.min(3, this.list.length));
     }
 
     getMeme(idStr: string): Meme {
         const id: number = Number(idStr);
-        return this.list[this.idMap.get(id)];
+        console.log("id: ", id, " idx: ", this.idMap.get(id));
+        console.log("lista: ", this.list);
+        const m : Meme = this.list[this.idMap.get(id)];
+        console.log("mem: ", m);
+        return m;
     }
 
 }
