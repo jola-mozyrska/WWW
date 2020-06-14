@@ -14,12 +14,16 @@ export class Meme {
         this.priceHistory.push(price);
     }
 
+    insertPriceHistory(priceHistory: Array<number>) : void {
+        this.priceHistory = priceHistory;
+    }
+
     getPriceHistory(): Array<number> {
         return this.priceHistory;
     }
 
-    changePrice(p: number): void {
-        this.priceHistory.push(p);
-        this.price = p;
-    }
+    // changePrice(p: number): void {
+    //     this.priceHistory.push(p);
+    //     this.price = p;
+    // }
 }

@@ -1,18 +1,17 @@
 import express from 'express';
 import {Meme} from "./Meme.js";
 import {MemeList} from "./MemeList.js";
+import {asyncDbRun} from "./utils.js";
+
+import cookieParser = require('cookie-parser');
+import csurf = require('csurf');
+import sqlite3 = require('sqlite3');
 
 const app = express();
-const cookieParser = require('cookie-parser');
-const csurf = require('csurf');
+const db = new sqlite3.Database(':memory:');
 
-const memeList: MemeList = new MemeList();
-memeList.push(new Meme(10, 'Gold', 800, 'https://i.redd.it/h7rplf9jt8y21.png'));
-memeList.push(new Meme(9, 'Platinum', 1100, 'https://i.pinimg.com/736x/93/31/11/933111c388887067c9b5c945d4960343.jpg'));
-memeList.push(new Meme(8, 'Priceless', 1000, 'https://i.imgflip.com/3sts2c.jpg'));
-memeList.push(new Meme(7, 'Remarkable', 1300, 'https://66.media.tumblr.com/a3f6a62e625ae491163aefeb383c9b32/386cf25fed95fe23-bf/s640x960/394781f5179022cdf902f28b871930a19fb66e59.jpg'));
-memeList.push(new Meme(6, 'Epic', 901, 'https://i.imgflip.com/30zz5g.jpg'));
-
+const memeList: MemeList = new MemeList(db);
+memeList.preparedb().catch((e) => console.log(e));
 
 app.use(cookieParser());
 const csrfProtection = csurf({ cookie: true });
@@ -25,12 +24,14 @@ function error(res: express.Response, code: number) {
 
 app.set('view engine', 'pug');
 
-app.get('/', (req, res) => {
-    res.render('index', { title: 'Meme market', message: 'Hello there!', memes: memeList.getMostExpensiveMemes()});
+app.get('/', async (req, res) => {
+    const mostExpensiveList = await memeList.getMostExpensiveMemes()
+    res.render('index', { title: 'Meme market', message: 'Hello there!', memes: mostExpensiveList});
 });
 
-app.get('/meme/:memeId', (req, res) =>{
-    const meme = memeList.getMeme(req.params.memeId);
+app.get('/meme/:memeId', async (req, res) =>{
+    const memeId = req.params.memeId;
+    const meme = await memeList.getMeme(memeId);
     res.render('meme', { title: 'Historia cen', meme})
 })
 
@@ -38,12 +39,12 @@ app.use(express.urlencoded({
     extended: true
 }));
 
-app.post('/meme/:memeId', (req, res) => {
-    const meme = memeList.getMeme(req.params.memeId);
-
+app.post('/meme/:memeId', async (req, res) => {
     const price = Number(req.body.price);
-    if (! isNaN(price))
-        meme.changePrice(price);
+    if (! isNaN(price)) {
+        await memeList.changeMemePrice(req.params.memeId, price);
+    }
+    const meme = await memeList.getMeme(req.params.memeId);
     res.render('meme', { meme })
 })
 
