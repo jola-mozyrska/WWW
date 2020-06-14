@@ -12,11 +12,43 @@ export class MemeList {
     async preparedb() : Promise<any> {
         this.create_table_prices().then(() => {
         this.create_table_memes().then(async () => {
-        await this.push(1, 'Gold', 'https://i.redd.it/h7rplf9jt8y21.png', 800);
-        await this.push(2, 'Platinum', 'https://i.pinimg.com/736x/93/31/11/933111c388887067c9b5c945d4960343.jpg', 1100);
-        await this.push(3, 'Priceless', 'https://i.imgflip.com/3sts2c.jpg', 1000);
-        await this.push(4, 'Remarkable', 'https://66.media.tumblr.com/a3f6a62e625ae491163aefeb383c9b32/386cf25fed95fe23-bf/s640x960/394781f5179022cdf902f28b871930a19fb66e59.jpg', 1300);
-        await this.push(5, 'Epic', 'https://i.imgflip.com/30zz5g.jpg', 900)})});
+            await this.push(1, 'Gold', 'https://i.redd.it/h7rplf9jt8y21.png', 800);
+            await this.push(2, 'Platinum', 'https://i.pinimg.com/736x/93/31/11/933111c388887067c9b5c945d4960343.jpg', 1100);
+            await this.push(3, 'Priceless', 'https://i.imgflip.com/3sts2c.jpg', 1000);
+            await this.push(4, 'Remarkable', 'https://66.media.tumblr.com/a3f6a62e625ae491163aefeb383c9b32/386cf25fed95fe23-bf/s640x960/394781f5179022cdf902f28b871930a19fb66e59.jpg', 1300);
+            await this.push(5, 'Epic', 'https://i.imgflip.com/30zz5g.jpg', 900
+        )})});
+    }
+
+    async prepareUsers() : Promise<any> {
+        this.create_table_users().then(async () => {
+            await this.add_user("admin", "admin");
+            await this.add_user("user", "user");
+        });
+    }
+
+    add_user(name : string, passwd : string) : Promise<any> {
+        return new Promise((resolve, reject) => {
+            this.db.run(`INSERT INTO users (username, password) VALUES ('${name}', '${passwd}')`, (err) => {
+                if(err) {
+                    reject(`DB Error ${err}`);
+                    return;
+                }
+                resolve();
+            });
+        });
+    }
+
+    create_table_users() : Promise<any> {
+        return new Promise((resolve, reject) => {
+            this.db.run(`CREATE TABLE users (id INTEGER PRIMARY KEY AUTOINCREMENT, username VARCHAR, password VARCHAR)`, (err) => {
+                if(err) {
+                    reject('DB Error');
+                    return;
+                }
+                resolve();
+            });
+        });
     }
 
     create_table_memes() : Promise<any> {

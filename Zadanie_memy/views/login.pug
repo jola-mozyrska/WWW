@@ -1,0 +1,21 @@
+html
+
+    head
+
+    style
+
+        include style.css
+
+    body
+
+        h1= message
+        p
+            a(href="/") Memy
+
+        form(method='POST', action='/login')
+            label(for='login') Login:
+            input(type='text', placeholder='login' name='login')
+            label(for='pw') Hasło:
+            input(type="password" name="password")
+            input(type='hidden', name='_csrf' value=csrfToken)       
+            input(type='submit')
