@@ -6,11 +6,13 @@ import session from "express-session";
 import cookieParser = require('cookie-parser');
 import csurf = require('csurf');
 import * as sqlite from "sqlite3";
+import bcrypt from "bcrypt";
 
 const SQLiteStore = require("connect-sqlite3")(session);
+const SECRET = "secret";
 
 const app = express();
-app.use(cookieParser());
+app.use(cookieParser(SECRET));
 const csrfProtection = csurf({ cookie: true });
 app.set('view engine', 'pug');
 app.use(express.urlencoded({
@@ -25,7 +27,7 @@ app.use(session({
     },
     resave: false,
     saveUninitialized: false,
-    secret: "secret",
+    secret: SECRET,
     store: new SQLiteStore({ db: "memes.db" }),
 }));
 
@@ -39,6 +41,10 @@ app.use((req, res, next) => {
 const initialMemeList = new MemeList(db);
 initialMemeList.preparedb().catch((e) => console.log(e));
 initialMemeList.prepareUsers().catch((e) => console.log(e));
+db.close((err) => {
+    if (err)
+      return console.error(err.message);
+});
 
 function error(res: express.Response) {
     res.render("error");
@@ -53,7 +59,7 @@ app.get('/', async (req, res) => {
 app.get('/meme/:memeId', csrfProtection, async (req, res) =>{
     const memeId = req.params.memeId;
     const meme = await res.locals.memeList.getMeme(memeId);
-    res.render('meme', { title: 'Historia cen', meme, csrfToken: req.csrfToken()})
+    res.render('meme', { title: 'Historia cen', meme, csrfToken: req.csrfToken(), user: req.session?.user})
 })
 
 app.post('/meme/:memeId', csrfProtection, async (req, res) => {
@@ -67,9 +73,31 @@ app.post('/meme/:memeId', csrfProtection, async (req, res) => {
         return error(res);
     }
 
+    let OK = false;
+    for(let i = 0; i < 10; ++i) {
+        try{
+            await asyncDbRun(res.locals.db, "BEGIN EXCLUSIVE TRANSACTION;");
+        }
+        catch(e) {
+            if (e.code !== "SQLITE_BUSY") {
+                OK = true;
+                break;
+            }
+        }
+    }
+
+    if(!OK) {
+        return console.error("database locked");
+    }
+
+
     await res.locals.memeList.changeMemePrice(req.params.memeId, price);
-    const meme = await res.locals.memeList.getMeme(req.params.memeId);
-    res.render('meme', { meme })
+    // const meme = await res.locals.memeList.getMeme(req.params.memeId);
+    // res.render('meme', { meme })
+    // res.redirect("/meme/:memeId");
+    const memeId = req.params.memeId;
+    const meme = await res.locals.memeList.getMeme(memeId);
+    res.render('meme', { title: 'Historia cen', meme, csrfToken: req.csrfToken(), user: req.session?.user})
 })
 
 app.get("/login", csrfProtection, (req, res, next) => {
@@ -78,7 +106,7 @@ app.get("/login", csrfProtection, (req, res, next) => {
 
 function checkUser(user : string, passwd : string, memeList : MemeList) : Promise<any> {
     return new Promise((resolve, reject) => {
-        memeList.db.run(`SELECT * FROM users WHERE username = '${user}' AND password = '${passwd}'`, (err) => {
+        memeList.db.run(`SELECT * FROM users WHERE username = '${user}' AND password = '${MemeList.hashPasswd(passwd)}'`, (err) => {
             if(err) {
                 reject(`DB Error ${err}`);
                 return;

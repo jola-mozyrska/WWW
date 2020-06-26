@@ -22,7 +22,8 @@ html
 
                     th #{price}
 
-        form(action="/meme/" + String(meme.id), method='POST')
-            input(type='text', name='price', value='')
-            input(type="hidden", name="_csrf", value=csrfToken)
-            input(type='submit', value='Zmień')
+        if user
+            form(action="/meme/" + String(meme.id), method='POST')
+                input(type='text', name='price', value='')
+                input(type="hidden", name="_csrf", value=csrfToken)
+                input(type='submit', value='Zmień')

@@ -1,9 +1,15 @@
 import {Meme} from "./Meme.js";
 import * as sqlite from 'sqlite3';
 import { resolve } from "dns";
+import bcrypt from "bcrypt";
+import {asyncDbRun} from "./utils.js";
 
 export class MemeList {
     db : sqlite.Database;
+
+    public static hashPasswd(passwd: string): string {
+        return bcrypt.hashSync(passwd, 10);
+    }
 
     constructor(db : sqlite.Database) {
         this.db = db;
@@ -29,7 +35,7 @@ export class MemeList {
 
     add_user(name : string, passwd : string) : Promise<any> {
         return new Promise((resolve, reject) => {
-            this.db.run(`INSERT INTO users (username, password) VALUES ('${name}', '${passwd}')`, (err) => {
+            this.db.run(`INSERT INTO users (username, password) VALUES (?, ?);`, [name, MemeList.hashPasswd(passwd)], (err) => {
                 if(err) {
                     reject(`DB Error ${err}`);
                     return;
@@ -77,7 +83,7 @@ export class MemeList {
 
     push(id : number, name : string, url : string, price : number) : Promise<any> {
         return new Promise((resolve, reject) => {
-            this.db.run(`INSERT INTO memes (id, name, url, price) VALUES (${id}, '${name}', '${url}', ${price})`, (err) => {
+            this.db.run(`INSERT INTO memes (id, name, url, price) VALUES (?, ?, ?, ?);`, [id, name, url, price], (err) => {
                 if(err) {
                     reject(`DB Error ${err}`);
                     return;
@@ -86,7 +92,7 @@ export class MemeList {
             });
         }).then(() => {
             return new Promise((resolve, reject) => {
-                this.db.run(`INSERT INTO prices (meme_id, value) VALUES (${id}, ${price})`, (err) => {
+                this.db.run(`INSERT INTO prices (meme_id, value) VALUES (?, ?);`, [id, price], (err) => {
                     if(err) {
                         reject('DB Error');
                         return;
@@ -116,7 +122,7 @@ export class MemeList {
         return new Promise((resolve, reject) => {
             this.db.all(`SELECT * FROM memes WHERE id = ${id};`, (err, row) => {
                 if(err || row === undefined) {
-                    reject('DB Error');
+                    reject('DB Error1');
                     return;
                 }
                 const meme = new Meme(row[0].id, row[0].name, row[0].url, row[0].price);
@@ -142,21 +148,26 @@ export class MemeList {
         const id: number = Number(idStr);
 
         return new Promise((resolve, reject) => {
-            this.db.run(`INSERT INTO prices (meme_id, value) VALUES (${id}, ${price})`, (err) => {
-                if(err) {
-                    reject('DB Error');
-                    return;
-                }
-                resolve();
-            })
+                this.db.run(`INSERT INTO prices (meme_id, value) VALUES (?, ?);`, [id, price], (err) => {
+                    if(err) {
+                        reject('DB Error');
+                        asyncDbRun(this.db, "ROLLBACK;");
+                        return;
+                    }
+                    resolve();
+                });
         }).then(() => {
             return new Promise((resolve, reject) => {
                 this.db.run(`UPDATE memes SET price = ${price} WHERE id = ${id}`, (err) => {
                     if(err) {
                         reject('DB Error');
+                        asyncDbRun(this.db, "ROLLBACK;");
+                        return;
                     }
+
+                    asyncDbRun(this.db, "COMMIT;");
                     resolve();
-                })
+                });
             });
         });
     }
